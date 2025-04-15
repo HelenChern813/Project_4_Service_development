@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Клиент {{ client.email }} {% endblock %}
+
+{% block content %}
+
+<div class="row text-center mt-2">
+    <p> Подродна информация о клиенте:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Почта: {{ client.email }}</li>
+        <li class="list-group-item">Полное имя: {{ client.full_name }}</li>
+        <li class="list-group-item">Комментарий: {{ client.comment }}</li>
+        <a href="{% url 'sending_messages:client_edit' client.pk %}" class="btn btn-secondary">Редактировать</a>
+        <a href="{% url 'sending_messages:client_delete' client.pk %}" class="btn btn-warning">Удалить</a>
+        <a href="{% url 'sending_messages:client_list' %}" class="btn btn-secondary">Назад</a>
+    </ul>
+</div>
+{% endblock %}

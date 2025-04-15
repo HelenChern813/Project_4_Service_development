@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import CustomUser
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class Client(models.Model):
@@ -27,18 +27,18 @@ class Message(models.Model):
     ''' Модель сообщений '''
 
     theme = models.CharField(max_length=100, verbose_name='Тема письма', help_text='Введите тему письма')
-    body_massage = models.TextField(verbose_name='Текст сообщений', help_text='Введите текст сообщения')
+    body_message = models.TextField(verbose_name='Текст сообщений', help_text='Введите текст сообщения')
     owner = models.ForeignKey(
         CustomUser,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="massages_owner",
+        related_name="messages_owner",
         verbose_name="Владелец",
     )
 
     def __str__(self):
-        return f'{self.body_massage}'
+        return f'{self.body_message}'
 
     class Meta:
         verbose_name = "Сообщение"
@@ -111,4 +111,37 @@ class Mailing(models.Model):
         ordering = ["id", ]
         permissions = [
             ("can_cancel_mailing", "Can cancel mailing"),
+        ]
+
+
+class MailingStatus(models.Model):
+    """Модель «Попытка рассылки»"""
+
+    attempted_at = models.DateTimeField(
+        verbose_name="Дата и время попытки отправки",
+    )
+
+    status = models.BooleanField(default=False, verbose_name="Статус рассылки", help_text="Статус рассылки")
+
+    mail_server_response = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name="Ответ почтового сервера",
+    )
+
+    mailing = models.ForeignKey(
+        Mailing,
+        on_delete=models.CASCADE,
+        related_name="attempts",
+        verbose_name="Рассылка",
+    )
+
+    def __str__(self):
+        return f"{self.pk} - {self.mailing}. Статус: {self.status}"
+
+    class Meta:
+        verbose_name = "Попытка рассылки"
+        verbose_name_plural = "Попытки рассылки"
+        ordering = [
+            "id",
         ]

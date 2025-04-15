@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Список рассылок{% endblock %}
+
+{% block content %}
+<div class="row mt-5 pt-5">
+    <h5 class="text-center text-secondary">Добро пожаловать, {{ user.email }}</h5>
+</div>
+<div>Список всех рассылок</div>
+<div class="container mt-5">
+    <div class="card">
+        {% for mailing in mailings %}
+            {% if mailing.owner == user %}
+                <div class="card-header">
+                    <a href="{% url 'sending_messages:mailing_detail' mailing.pk %}">{{ mailing.start_sending }}</a>
+                </div>
+                <div class="card-body">
+
+                    <h4 class="card-title">{{ mailing.clients }}</h4>
+                    <p class="card-text">{{ mailing.message }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

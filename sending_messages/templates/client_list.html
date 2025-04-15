@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="row mt-5 pt-5">
+    <h1 class="text-center"> Главная </h1>
+    <h5 class="text-center text-secondary">Добро пожаловать, {{ user.email }}</h5>
+</div>
+<div>Список всех клиентов</div>
+<div class="container mt-5">
+    <div class="card">
+        {% for client in clients %}
+            {% if client.owner == user %}
+                <div class="card-header">
+                    <a href="{% url 'sending_messages:client_detail' client.pk %}">{{ client.email }}</a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ client.full_name }}</h4>
+                    <p class="card-text">{{ client.comment |truncatechars:100 }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
