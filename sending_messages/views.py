@@ -1,15 +1,16 @@
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Client, Message, Mailing
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from .forms import MailingForm
+from .models import Client, Mailing, Message
 
 
 class ClientCreateView(CreateView):
     model = Client
-    fields = ['email', 'full_name', 'comment']
-    template_name = 'client_form.html'
-    success_url = reverse_lazy('sending_messages:client_list')
+    fields = ["email", "full_name", "comment"]
+    template_name = "client_form.html"
+    success_url = reverse_lazy("sending_messages:client_list")
 
     def form_valid(self, form):
         client = form.save()
@@ -27,28 +28,28 @@ class ClientListView(ListView):
 
 class ClientDetailView(DetailView):
     model = Client
-    template_name = 'client_detail.html'
-    context_object_name = 'client'
+    template_name = "client_detail.html"
+    context_object_name = "client"
 
 
 class ClientUpdateView(UpdateView):
     model = Client
-    fields = ['email', 'full_name', 'comment']
-    template_name = 'client_form.html'
-    success_url = reverse_lazy('sending_messages:client_list')
+    fields = ["email", "full_name", "comment"]
+    template_name = "client_form.html"
+    success_url = reverse_lazy("sending_messages:client_list")
 
 
 class ClientDeleteView(DeleteView):
     model = Client
-    template_name = 'client_confirm_delete.html'
-    success_url = reverse_lazy('sending_messages:client_list')
+    template_name = "client_confirm_delete.html"
+    success_url = reverse_lazy("sending_messages:client_list")
 
 
 class MessageCreateView(CreateView):
     model = Message
-    fields = ['theme', 'body_message']
-    template_name = 'message_form.html'
-    success_url = reverse_lazy('sending_messages:message_list')
+    fields = ["theme", "body_message"]
+    template_name = "message_form.html"
+    success_url = reverse_lazy("sending_messages:message_list")
 
     def form_valid(self, form):
         message = form.save()
@@ -66,27 +67,27 @@ class MessageListView(ListView):
 
 class MessageDetailView(DetailView):
     model = Message
-    template_name = 'message_detail.html'
-    context_object_name = 'message'
+    template_name = "message_detail.html"
+    context_object_name = "message"
 
 
 class MessageUpdateView(UpdateView):
     model = Message
-    fields = ['theme', 'body_message']
-    template_name = 'message_form.html'
-    success_url = reverse_lazy('sending_messages:message_list')
+    fields = ["theme", "body_message"]
+    template_name = "message_form.html"
+    success_url = reverse_lazy("sending_messages:message_list")
 
 
 class MessageDeleteView(DeleteView):
     model = Message
-    template_name = 'message_confirm_delete.html'
-    success_url = reverse_lazy('sending_messages:message_list')
+    template_name = "message_confirm_delete.html"
+    success_url = reverse_lazy("sending_messages:message_list")
 
 
 class MailingCreateView(CreateView):
     model = Mailing
     form_class = MailingForm
-    template_name = 'mailing_form.html'
+    template_name = "mailing_form.html"
     success_url = reverse_lazy("sending_messages:mailing_list")
 
     def form_valid(self, form):
@@ -110,18 +111,18 @@ class MailingListView(ListView):
 
 class MailingDetailView(DetailView):
     model = Mailing
-    template_name = 'mailing_detail.html'
-    context_object_name = 'mailing'
+    template_name = "mailing_detail.html"
+    context_object_name = "mailing"
 
 
 class MailingUpdateView(UpdateView):
     model = Mailing
     form_class = MailingForm
-    template_name = 'mailing_form.html'
-    success_url = reverse_lazy('sending_messages:mailing_list')
+    template_name = "mailing_form.html"
+    success_url = reverse_lazy("sending_messages:mailing_list")
 
 
 class MailingDeleteView(DeleteView):
     model = Mailing
-    template_name = 'mailing_confirm_delete.html'
-    success_url = reverse_lazy('sending_messages:mailing_list')
+    template_name = "mailing_confirm_delete.html"
+    success_url = reverse_lazy("sending_messages:mailing_list")

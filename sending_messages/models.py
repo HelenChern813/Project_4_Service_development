@@ -1,33 +1,47 @@
-from django.db import models
-from users.models import CustomUser
 from datetime import datetime
+
+from django.db import models
+
+from users.models import CustomUser
 
 
 class Client(models.Model):
-    ''' Модель «Получатель рассылки» '''
+    """Модель «Получатель рассылки»"""
 
-    email = models.EmailField(unique=True, verbose_name='Email', help_text='Введите почту получателя')
-    full_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='Полное имя получателя',
-                                 help_text='Введите полное имя получателя')
-    comment = models.TextField(verbose_name='Комментарий', help_text='Введите комментарий о получателе', blank=True,
-                               null=True)
-    owner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True,
-                              related_name="recipients_owner", verbose_name="Владелец")
+    email = models.EmailField(unique=True, verbose_name="Email", help_text="Введите почту получателя")
+    full_name = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name="Полное имя получателя",
+        help_text="Введите полное имя получателя",
+    )
+    comment = models.TextField(
+        verbose_name="Комментарий", help_text="Введите комментарий о получателе", blank=True, null=True
+    )
+    owner = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="recipients_owner",
+        verbose_name="Владелец",
+    )
 
     def __str__(self):
-        return f'{self.email}'
+        return f"{self.email}"
 
     class Meta:
         verbose_name = "Получатель"
         verbose_name_plural = "Получатели"
-        ordering = ['id', 'email']
+        ordering = ["id", "email"]
 
 
 class Message(models.Model):
-    ''' Модель сообщений '''
+    """Модель сообщений"""
 
-    theme = models.CharField(max_length=100, verbose_name='Тема письма', help_text='Введите тему письма')
-    body_message = models.TextField(verbose_name='Текст сообщений', help_text='Введите текст сообщения')
+    theme = models.CharField(max_length=100, verbose_name="Тема письма", help_text="Введите тему письма")
+    body_message = models.TextField(verbose_name="Текст сообщений", help_text="Введите текст сообщения")
     owner = models.ForeignKey(
         CustomUser,
         on_delete=models.SET_NULL,
@@ -38,16 +52,16 @@ class Message(models.Model):
     )
 
     def __str__(self):
-        return f'{self.body_message}'
+        return f"{self.body_message}"
 
     class Meta:
         verbose_name = "Сообщение"
         verbose_name_plural = "Сообщения"
-        ordering = ['id', 'theme']
+        ordering = ["id", "theme"]
 
 
 class Mailing(models.Model):
-    ''' Модель рассылки сообщений'''
+    """Модель рассылки сообщений"""
 
     COMPLETED = "completed"
     CREATED = "created"
@@ -108,7 +122,9 @@ class Mailing(models.Model):
     class Meta:
         verbose_name = "Рассылка"
         verbose_name_plural = "Рассылки"
-        ordering = ["id", ]
+        ordering = [
+            "id",
+        ]
         permissions = [
             ("can_cancel_mailing", "Can cancel mailing"),
         ]
