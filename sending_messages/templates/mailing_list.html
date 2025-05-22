@@ -19,6 +19,10 @@
                     <h4 class="card-title">{{ mailing.clients }}</h4>
                     <p class="card-text">{{ mailing.message }}</p>
                 </div>
+                <form method="post" action="{% url 'sending_messages:launch_mailing' mailing.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-success btn-sm">Запустить рассылку</button>
+                </form>
             {% endif %}
         {% endfor %}
     </div>

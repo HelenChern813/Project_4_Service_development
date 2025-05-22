@@ -4,7 +4,8 @@ from sending_messages.apps import SendingMessagesConfig
 from sending_messages.views import (ClientCreateView, ClientDeleteView, ClientDetailView, ClientListView,
                                     ClientUpdateView, MailingCreateView, MailingDeleteView, MailingDetailView,
                                     MailingListView, MailingUpdateView, MessageCreateView, MessageDeleteView,
-                                    MessageDetailView, MessageListView, MessageUpdateView)
+                                    MessageDetailView, MessageListView, MessageUpdateView, LaunchMailingView,
+                                    HomePageView)
 
 app_name = SendingMessagesConfig.name
 
@@ -24,4 +25,6 @@ urlpatterns = [
     path("mailing_detail/<int:pk>/", MailingDetailView.as_view(), name="mailing_detail"),
     path("mailing_edit/<int:pk>/", MailingUpdateView.as_view(), name="mailing_edit"),
     path("mailing_delete/<int:pk>/", MailingDeleteView.as_view(), name="mailing_delete"),
+    path("launch_mailing/<int:pk>/", LaunchMailingView.as_view(), name="launch_mailing"),
+    path("home_page/<int:pk>/", HomePageView.as_view(), name="home_page"),
 ]
