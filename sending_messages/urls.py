@@ -2,10 +2,10 @@ from django.urls import path
 
 from sending_messages.apps import SendingMessagesConfig
 from sending_messages.views import (ClientCreateView, ClientDeleteView, ClientDetailView, ClientListView,
-                                    ClientUpdateView, MailingCreateView, MailingDeleteView, MailingDetailView,
-                                    MailingListView, MailingUpdateView, MessageCreateView, MessageDeleteView,
-                                    MessageDetailView, MessageListView, MessageUpdateView, LaunchMailingView,
-                                    HomePageView)
+                                    ClientUpdateView, HomePageView, LaunchMailingView, MailingCreateView,
+                                    MailingDeleteView, MailingDetailView, MailingListView, MailingUpdateView,
+                                    MessageCreateView, MessageDeleteView, MessageDetailView, MessageListView,
+                                    MessageUpdateView)
 
 app_name = SendingMessagesConfig.name
 

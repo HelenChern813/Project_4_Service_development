@@ -133,10 +133,7 @@ class Mailing(models.Model):
 class MailingStatus(models.Model):
     """Модель «Попытка рассылки»"""
 
-    attempted_at = models.DateTimeField(
-        verbose_name="Дата и время попытки отправки",
-        auto_now=True
-    )
+    attempted_at = models.DateTimeField(verbose_name="Дата и время попытки отправки", auto_now=True)
 
     status = models.BooleanField(default=False, verbose_name="Статус рассылки", help_text="Статус рассылки")
 

@@ -10,11 +10,11 @@ class Command(BaseCommand):
     """Кастомная команда запуска рассылки"""
 
     def add_arguments(self, parser):
-        parser.add_argument('mailing_id', type=int)
+        parser.add_argument("mailing_id", type=int)
 
     def handle(self, *args, **kwargs):
 
-        mailing_id = kwargs['mailing_id']
+        mailing_id = kwargs["mailing_id"]
         try:
             mailing = Mailing.objects.get(id=mailing_id)
             mailing.status = Mailing.RUNNING
