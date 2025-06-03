@@ -1,16 +1,18 @@
 import secrets
 
 from django.conf import settings
+from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from sending_messages.models import MailingStatus
-from users.forms import CustomUserCreationForm
-from users.models import CustomUser
+from users.forms import CustomUserCreationForm, ProfileForm
+from users.models import CustomUser, Profile
 
 
 class RegisterView(CreateView):
@@ -28,7 +30,7 @@ class RegisterView(CreateView):
         user.token = token
         user.save()
         host = self.request.get_host()
-        url = f"http://{host}/email-confirm/{token}/"
+        url = f"http://{host}/confirm/{token}/"
         send_mail(
             subject="Подтверждение почты",
             message=f"Перейдите по ссылке для подверждения почты: {url}",
@@ -73,3 +75,26 @@ class PasswordResetUserView(PasswordResetView):
     from_email = settings.DEFAULT_FROM_EMAIL
     success_url = reverse_lazy("users:password_reset_done")
     subject_template_name = "password_reset_subject.txt"
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
+
+
+class ShowProfilePageView(LoginRequiredMixin, DetailView):
+    model = Profile
+    template_name = "profile.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs["pk"])
+        context["page_user"] = page_user
+        return context
+
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = "profile_form.html"
+    success_url = reverse_lazy("users:profile")

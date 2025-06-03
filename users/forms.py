@@ -1,6 +1,7 @@
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -21,3 +22,13 @@ class CustomUserCreationForm(UserCreationForm):
         )
 
         self.fields["password2"].help_text = "Введите тот же пароль для подтверждения."
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["bio", "profile_pic", "facebook", "twitter", "instagram"]
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)  # Получаем текущего пользователя
+        super().__init__(*args, **kwargs)

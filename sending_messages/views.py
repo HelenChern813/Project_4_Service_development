@@ -5,10 +5,8 @@ from django.views import View
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from users.models import CustomUser
-
 from .forms import MailingForm
-from .models import Client, Mailing, Message
+from .models import Client, Mailing, MailingStatus, Message
 from .services import launch_mailing
 
 
@@ -112,7 +110,7 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
 class MailingListView(LoginRequiredMixin, ListView):
     model = Mailing
     template_name = "mailing_list.html"
-    context_object_name = "mailings"
+    context_object_name = "mailing"
 
 
 class MailingDetailView(LoginRequiredMixin, DetailView):
@@ -140,3 +138,9 @@ class LaunchMailingView(LoginRequiredMixin, View):
         mailing = get_object_or_404(Mailing, id=pk)
         launch_mailing(mailing)
         return redirect("sending_messages:mailing_list")
+
+
+class MailingStatusListView(LoginRequiredMixin, ListView):
+    model = MailingStatus
+    template_name = "mailing_status_detail.html"
+    context_object_name = "status"
