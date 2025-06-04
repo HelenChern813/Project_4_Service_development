@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
@@ -69,6 +71,7 @@ class MessageListView(LoginRequiredMixin, ListView):
     context_object_name = "messages"
 
 
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class MessageDetailView(LoginRequiredMixin, DetailView):
     model = Message
     template_name = "message_detail.html"
@@ -113,6 +116,7 @@ class MailingListView(LoginRequiredMixin, ListView):
     context_object_name = "mailing"
 
 
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class MailingDetailView(LoginRequiredMixin, DetailView):
     model = Mailing
     template_name = "mailing_detail.html"
