@@ -9,6 +9,8 @@
                 <a class="navbar-brand" href="{% url 'sending_messages:mailing_list' %}">Список рассылок</a>
                 <a class="navbar-brand" href="{% url 'sending_messages:mailing_client' %}">Создать рассылку</a>
                 <a class="navbar-brand" href="{% url 'users:report' user.pk %}">Главная / статистика</a>
+                <a class="navbar-brand" href="{% url 'users:profile' user.pk %}">Профиль</a>
+                <a class="navbar-brand" href="{% url 'users:profile_edit' user.pk %}">Редактировать профиль</a>
                 <a class="navbar-brand" href="{% url 'users:logout' %}">Выйти</a>
             {% else %}
                 <a class="navbar-brand" href="{% url 'users:login' %}">Войти</a>

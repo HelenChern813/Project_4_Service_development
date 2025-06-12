@@ -113,7 +113,7 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
 class MailingListView(LoginRequiredMixin, ListView):
     model = Mailing
     template_name = "mailing_list.html"
-    context_object_name = "mailing"
+    context_object_name = "mailings"
 
 
 @method_decorator(cache_page(60 * 5), name="dispatch")
@@ -146,5 +146,5 @@ class LaunchMailingView(LoginRequiredMixin, View):
 
 class MailingStatusListView(LoginRequiredMixin, ListView):
     model = MailingStatus
-    template_name = "mailing_status_detail.html"
+    template_name = "mailing_status_list.html"
     context_object_name = "status"
