@@ -27,7 +27,7 @@ class CustomUserCreationForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ["bio", "profile_pic", 'first_name', 'last_name']
+        fields = ["bio", "profile_pic", "first_name", "last_name"]
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)  # Получаем текущего пользователя
