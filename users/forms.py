@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import CustomUser, Profile
+from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -26,8 +26,8 @@ class CustomUserCreationForm(UserCreationForm):
 
 class ProfileForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ["bio", "profile_pic", "facebook", "twitter", "instagram"]
+        model = CustomUser
+        fields = ["bio", "profile_pic", 'first_name', 'last_name']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)  # Получаем текущего пользователя

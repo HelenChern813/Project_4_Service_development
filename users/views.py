@@ -12,7 +12,7 @@ from django.views.generic.edit import CreateView, UpdateView
 
 from sending_messages.models import MailingStatus
 from users.forms import CustomUserCreationForm, ProfileForm
-from users.models import CustomUser, Profile
+from users.models import CustomUser
 
 
 class RegisterView(CreateView):
@@ -83,18 +83,18 @@ def logout_view(request):
 
 
 class ShowProfilePageView(LoginRequiredMixin, DetailView):
-    model = Profile
+    model = CustomUser
     template_name = "profile.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
-        page_user = get_object_or_404(Profile, id=self.kwargs["pk"])
+        page_user = get_object_or_404(CustomUser, id=self.kwargs["pk"])
         context["page_user"] = page_user
         return context
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-    model = Profile
+    model = CustomUser
     form_class = ProfileForm
     template_name = "profile_form.html"
     success_url = reverse_lazy("users:profile")
