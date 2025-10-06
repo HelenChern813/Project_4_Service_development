@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Рассылка {{ mailing.pk }} {% endblock %}
+
+{% block content %}
+
+<div class="row text-center mt-2">
+    <p> Подродна информация о рассылке:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Дата и время первой отправки: {{ mailing.start_sending }}</li>
+        <li class="list-group-item">Дата и время окончания отправки: {{ mailing.stop_sending }}</li>
+        <li class="list-group-item">Статус: {{ mailing.status }}</li>
+        <li class="list-group-item">Сообщение: {{ mailing.message |truncatechars:100 }}</li>
+        <li class="list-group-item">Получатели:
+                <p> {{ mailing.clients }}</p>
+        </li>
+        <a href="{% url 'sending_messages:mailing_edit' mailing.pk %}" class="btn btn-secondary">Редактировать</a>
+        <a href="{% url 'sending_messages:mailing_delete' mailing.pk %}" class="btn btn-warning">Удалить</a>
+        <a href="{% url 'sending_messages:mailing_list' %}" class="btn btn-secondary">Назад</a>
+    </ul>
+</div>
+{% endblock %}

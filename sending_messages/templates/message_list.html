@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="row mt-5 pt-5">
+    <h5 class="text-center text-secondary">Добро пожаловать, {{ user.email }}</h5>
+</div>
+<div>Список всех сообщений</div>
+<div class="container mt-5">
+    <div class="card">
+        {% for message in messages %}
+            {% if message.owner == user %}
+                <div class="card-header">
+                    <a href="{% url 'sending_messages:message_detail' message.pk %}">{{ message.theme }}</a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-text">{{ message.body_message |truncatechars:100 }}</h5>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+[
+{
+    "model": "users.customuser",
+    "pk": 1,
+    "fields": {
+        "last_login": null,
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-15T07:47:14.703Z",
+        "email": "admin@admin.ru",
+        "password": "pbkdf2_sha256$1000000$UZR2y3ysIqfbE09jakSZq1$kB7G/swImNFBVzNqiq6nQe9265muq+NtPc4dRHxWNWE=",
+        "token": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+        "last_login": "2025-06-03T17:12:36.761Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-15T07:48:03.046Z",
+        "email": "admin@exemple.com",
+        "password": "pbkdf2_sha256$1000000$5OlZ6ZtbzG66tWMEiMS6N0$6u7B2CsyLEagLEC+BoztPllVJYSGOAbQGPln2IIOXqE=",
+        "token": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 4,
+    "fields": {
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": false,
+        "date_joined": "2025-05-24T09:30:19.524Z",
+        "email": "chernotalova.e@yandex.ru",
+        "password": "pbkdf2_sha256$1000000$zRSi6t1EeXnEG5AM180Tyu$09uT8Id6AeV18UTi2pJzt1m3Q/7l+yHR9rRCuYM5Ygs=",
+        "token": "60dd1fe3e3d74ef9f8cc1e5f58b52a9e",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

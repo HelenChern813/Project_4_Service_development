@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Сообщение {% endblock %}
+
+{% block content %}
+
+<div class="row text-center mt-2">
+    <p> Подродна информация о сообщении:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Тема сообщения: {{ message.theme }}</li>
+        <li class="list-group-item">Текст сообщения: {{ message.body_message }}</li>
+        <a href="{% url 'sending_messages:message_edit' message.pk %}" class="btn btn-secondary">Редактировать</a>
+        <a href="{% url 'sending_messages:message_delete' message.pk %}" class="btn btn-warning">Удалить</a>
+        <a href="{% url 'sending_messages:message_list' %}" class="btn btn-secondary">Назад</a>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Статистика {% endblock %}
+
+{% block content %}
+
+<div class="row text-center mt-2">
+    <p> Подродна информация о рассылках:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Количество успешных попыток рассылок: {{ True }}</li>
+        <li class="list-group-item">Количество неудачных попыток рассылок: {{ False }}</li>
+        <li class="list-group-item">Количество попыток рассылок: {{ count }}</li>
+        <a href="{% url 'sending_messages:message_list' %}" class="btn btn-secondary">Назад</a>
+    </ul>
+</div>
+{% endblock %}

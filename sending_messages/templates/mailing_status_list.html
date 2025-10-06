@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Попытки рассылки {{ client.email }} {% endblock %}
+
+{% block content %}
+<h2>Попытки рассылки</h2>
+
+<div class="row text-center mt-2">
+    <p> Подродна информация о попытки рассылке:</p>
+    <div class="container mt-5">
+        <div class="card">
+            {% for mailing in status %}
+                {% if mailing.mailing.owner == user %}
+                    <div class="card-header">
+                        <h3> Дата и время попытки отправки {{ mailing.attempted_at }}</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <h4 class="card-title">Статус рассылки {{ mailing.status }}</h4>
+                        <p class="card-text">Ответ почтового сервера {{ mailing.mail_server_response }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
