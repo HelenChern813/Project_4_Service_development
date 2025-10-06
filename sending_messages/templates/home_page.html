@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Статистика {% endblock %}
+
+{% block content %}
+
+<div class="row text-center mt-2">
+    <p> Подродна информация о рассылках:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Количество всех рассылок: {{ true_status }}</li>
+        <li class="list-group-item">Количество активных рассылок: {{ count_mailing }}</li>
+        <li class="list-group-item">Количество уникальных получателей: {{ all_clients }}</li>
+    </ul>
+</div>
+{% endblock %}
